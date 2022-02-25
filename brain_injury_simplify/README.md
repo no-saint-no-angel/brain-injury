@@ -33,7 +33,8 @@
 │   ├── loss.py
 │   ├── one_hot.py
 │   └── __pycache__
-├── test_classify_single_person.py
+├── predict_classify_one_person_3ch.py
+├── predict_classify_one_person_11ch.py
 ├── test_classify.py
 ├── train_classify.py
 ├── train_seg.py
@@ -54,10 +55,12 @@
 - 训练过程的损失和准确率数据在`./loss&acc_seg`对应的文件夹下，模型参数在`./weights/seg/`对应的文件夹下；  
 - 模型推断：执行 `predict_seg.py`。
 
-3、合成特征图
-
-对于每个案例，CT切片有数量不等。比如有`N`张CT，可以合成`N-2`张特征图。
-- 合成特征图：执行`./data_preprocess/generate_npy_from_pic.py`。
+3、合成特征图  
+由于一些“历史遗留”问题，导致目前有两种合成特征图的方法，进而导致有两种不同的训练和预测文件。
+- **合成三通道特征图**：对于每个案例，CT切片有数量不等。比如有`N`张CT，可以合成`N-2`张特征图。合成特征图：执行`./data_preprocess/generate_3ch_npy_from_pic.py`。
+- **合成十一通道特征图**：合成十一通道的目的是想尽可能的把每个案例所有的特征信息融合到一个特征图里面，因为判定单个案例的损伤类型
+  是依靠全部的切片而不只是其中的某几张。但考虑到案例切片数量的差异较大，经过大致的统计得出每个特征图包含11个切片，
+  不足或者多出来的切片以添加空白切片或者删除的形式调整到11的倍数。合成特征图：执行`./data_preprocess/generate_11ch_npy_from_pic.py`
 
 ###  分类训练和测试
 本项目设计的分类网络是基于resnet-18改进的，在卷积层和全连接层之间，
@@ -71,5 +74,5 @@
 
 2、分类模型预测和验证  
 - 模型推断及准确率验证（每张特征图）：执行 `test_classify.py`，预测结果和金标准写入对应的文件夹下；  
-- 模型推断及准确率验证（每哥案例）：执行 `test_classify_single_person.py`。  
+- 模型推断及准确率验证（每个案例）：三通道特征图：执行 `predict_classify_one_person_3ch.py`；十一通道特征图：执行 `predict_classify_one_person_11ch.py`。
 

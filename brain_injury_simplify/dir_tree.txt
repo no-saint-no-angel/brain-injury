@@ -1,0 +1,37 @@
+.
+├── brain_data
+│   ├── cla
+│   └── seg
+├── classification_file
+│   ├── class_indices.json
+│   ├── custom_dataset_npy.py
+│   └── custom_transforms_mine.py
+├── data_preprocess
+│   ├── __pycache__
+├── loss&acc_seg
+│   ├── ebu_plus1215_4bei
+│   ├── nie_bmp_json
+│   └── zhenbu_plus1215_4bei
+├── network_big
+│   ├── network_deeplab_seg
+│   └── network_resnet_aspp
+├── predict_seg.py
+├── pre_weights
+│   └── resnet50-pre.pth
+├── segmentation_file
+│   ├── calc_loss.py
+│   ├── calcu_accuracy.py
+│   ├── custom_transforms_mine.py
+│   ├── dataset1.py
+│   ├── loss.py
+│   ├── one_hot.py
+│   └── __pycache__
+├── test_classify_one_person.py
+├── test_classify.py
+├── train_classify.py
+├── train_seg.py
+└── weights
+    ├── cla
+    └── seg
+
+18 directories, 24 files
